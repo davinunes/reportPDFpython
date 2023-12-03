@@ -3,6 +3,7 @@ from fpdf import FPDF
 from datetime import datetime
 import json
 import sys
+import base64
 
 app = Flask(__name__)
 
@@ -108,10 +109,20 @@ def gerar_pdf():
 
         # Salvar o PDF
         pdf_buffer = pdf.output(dest='S')
-        pdf_bytes = bytearray(pdf_buffer)
-        # Resposta com o PDF
-        return bytes(pdf_bytes), 200, {'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=parecer.pdf'}
-        
+
+        # Verificar o parâmetro na solicitação
+        return_as_base64 = request.args.get('base64', '').lower() == 'true'
+
+        if return_as_base64:
+            # Converter o PDF para base64
+            pdf_base64 = base64.b64encode(pdf_buffer).decode('utf-8')
+            return jsonify({'pdf_base64': pdf_base64}), 200
+        else:
+            # Resposta com o PDF binário
+            pdf_bytes = bytearray(pdf_buffer)
+            return bytes(pdf_bytes), 200, {'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=parecer.pdf'}
+
+
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
