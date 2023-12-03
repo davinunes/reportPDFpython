@@ -76,7 +76,7 @@ def gerar_pdf():
         # Bloco 2
         pdf.ln(2)
         pdf.set_font("Arial", '', 12)
-        pdf.bloco_texto_direita(f"{data_formatada}")
+        pdf.bloco_texto_direita(f"Taguatinga, {data_formatada}")
 
         # Bloco 3
         texto_bloco3 = f"Unidade: {conteudo_dict['unidade']}\nNotificação: {conteudo_dict['notificacao']}\nAssunto: {conteudo_dict['assunto']}"
@@ -100,11 +100,12 @@ def gerar_pdf():
 
         # Bloco 8
         pdf.ln(2)
+        pdf.set_font("Arial", 'B', 12)
         pdf.bloco_texto_justificado(f"Somos favoráveis, portanto, em {conteudo_dict['parecer']} a aplicação da penalidade.", 20, 20)
 
         # Bloco 9
         pdf.ln(5)
-        pdf.set_font("Arial", 'B', 14)
+        pdf.set_font("Arial", 'B', 12)
         pdf.bloco_texto_centralizado("Membros do Conselho Consultivo e Fiscal\nCondomínio Residencial Top Life - Miami Beach")
 
         # Salvar o PDF
