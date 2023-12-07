@@ -13,9 +13,6 @@ nomes_meses = [
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ]
 
-data_atual = datetime.now()
-data_formatada = data_atual.strftime(f"%d de {nomes_meses[data_atual.month - 1]} de %Y")
-
 class PDF(FPDF):
     def header(self):
         pass
@@ -74,6 +71,8 @@ def gerar_pdf():
         pdf.cell(0, 10, f"PARECER {conteudo_dict['notificacao']}", ln=True, align='C')
 
         # Bloco 2
+        data_atual = datetime.now()
+        data_formatada = data_atual.strftime(f"%d de {nomes_meses[data_atual.month - 1]} de %Y")
         pdf.ln(2)
         pdf.set_font("Arial", '', 12)
         pdf.bloco_texto_direita(f"Taguatinga, {data_formatada}")
@@ -103,10 +102,6 @@ def gerar_pdf():
         pdf.set_font("Arial", 'B', 12)
         pdf.bloco_texto_justificado(f"Somos favoráveis, portanto, em {conteudo_dict['parecer']} a aplicação da penalidade.", 20, 20)
 
-        # Bloco 9
-        pdf.ln(5)
-        pdf.set_font("Arial", 'B', 12)
-        pdf.bloco_texto_centralizado("Membros do Conselho Consultivo e Fiscal\nCondomínio Residencial Top Life - Miami Beach")
 
         # Salvar o PDF
         pdf_buffer = pdf.output(dest='S')
