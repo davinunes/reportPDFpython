@@ -91,11 +91,11 @@ def gerar_pdf():
 
         # Bloco 6
         pdf.ln(2)
-        pdf.bloco_texto_justificado("2. Análise\nForam apreciadas as provas apresentadas pela administração e confrontadas com a argumentação e demais fatos descritos no recurso. ", 20, 20)
+        pdf.bloco_texto_justificado(f"2. Análise\n{conteudo_dict['analise']} ", 20, 20)
 
         # Bloco 7
         pdf.ln(2)
-        pdf.bloco_texto_justificado(f"3. Concluímos\n{conteudo_dict['resultado']}", 20, 20)
+        pdf.bloco_texto_justificado(f"3. Concluímos\n {conteudo_dict['resultado']}", 20, 20)
 
         # Bloco 8
         pdf.ln(2)
